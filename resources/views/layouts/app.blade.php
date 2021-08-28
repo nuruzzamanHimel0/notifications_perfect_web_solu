@@ -64,13 +64,25 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown1">
                                     <a class="btn btn-light" href="{{ route('markAsRead') }}">Mark all read notfi</a>
+                                    <a class="btn btn-danger" href="{{ route('markAsUnread') }}">Mark all Unread
+                                        notfi</a>
+                                    <a class="btn btn-success" href="{{ route('notifyDelete') }}">Delete All notif</a>
+                                    <a class="btn btn-warning" href="{{ route('create.notification') }}">Create Nofifi</a>
+
                                     @foreach (Auth::user()->unreadNotifications as $notification)
                                         {{-- @php
                                             dd($notification->data['letter']['title']);
                                         @endphp --}}
-                                        <a class="dropdown-item" href="">
+                                        <a class="dropdown-item" href="#">
                                             {{ $notification->data['letter']['title'] }}
+
+
                                         </a>
+                                        <form action="{{ route('singleDelete') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $notification->id }}">
+                                            <button type="submit"><i class="fas fa-window-close"></i></button>
+                                        </form>
                                     @endforeach
 
 
@@ -86,7 +98,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
-                                                                                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                                                                                                                                                                                                                                                                                                                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
