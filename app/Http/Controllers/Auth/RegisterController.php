@@ -72,8 +72,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        // $user->notify(new MailNotification);
-        Notification::send($user,new MarkdownMailNotification);
+
+
+        $user->notify(new MailNotification);
+        // Notification::send($user,new MarkdownMailNotification);
         return $user;
     }
 }

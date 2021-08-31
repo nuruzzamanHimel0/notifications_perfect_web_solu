@@ -44,7 +44,10 @@ class MailNotification extends Notification
         return (new MailMessage)
                     ->line('The introduction to the notification. Name is ='.$notifiable->name.' ')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for using our application!')
+                    ->view(
+                        'html_mail'
+                    );
     }
 
     /**
